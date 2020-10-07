@@ -4,8 +4,10 @@ const wrongNotify = document.getElementById("wrong_notify"),
         generateNum = document.getElementById("generate_num"),
         clearAll = document.getElementById("clearAll"),
         keyboardInput = document.getElementById("keyboard_num"),
+        remainTimes = document.getElementById("remainTimes"),
         generateBtn = document.querySelector(".generate-btn"),
         submitBtn = document.querySelector(".submit-btn");
+        
         
 
         wrongNotify.style.display = "none";
@@ -55,10 +57,26 @@ function checkPin () {
     } else {
             wrongNotify.style.display = "block";
             document.querySelector("body").style.background = "red";
+
+            // show remain alert 
+            remainAlert();
+
         setTimeout(function() {
             wrongNotify.style.display = "none";
             document.querySelector("body").style.background = "black";
         }, 3000)
         
     }
+}
+
+function remainAlert() {
+    let remain = parseInt(remainTimes.textContent);
+    if(remain > 0) {
+        remain = remain - 1;
+        remainTimes.textContent = remain;
+        console.log(remainTimes.textContent);
+    } else if(remain == 0) {
+        submitBtn.setAttribute('disabled', true);
+    }
+    
 }
